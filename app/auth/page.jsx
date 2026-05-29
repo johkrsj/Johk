@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
@@ -20,7 +21,10 @@ export default function AuthPage() {
 
   const handleLogin = async () => {
     if (!email || !password) {
-      setMessage({ type: "error", text: "⚠️ Enter email and password" });
+      setMessage({
+        type: "error",
+        text: "⚠️ Enter email and password",
+      });
       return;
     }
 
@@ -34,7 +38,10 @@ export default function AuthPage() {
     setLoading(false);
 
     if (error) {
-      setMessage({ type: "error", text: "❌ Wrong email or password" });
+      setMessage({
+        type: "error",
+        text: "❌ Wrong email or password",
+      });
     } else {
       window.location.href = "/";
     }
@@ -42,7 +49,10 @@ export default function AuthPage() {
 
   const handleSignup = async () => {
     if (!email || !password || !confirmPassword || !username) {
-      setMessage({ type: "error", text: "⚠️ Fill all fields" });
+      setMessage({
+        type: "error",
+        text: "⚠️ Fill all fields",
+      });
       return;
     }
 
@@ -84,7 +94,6 @@ export default function AuthPage() {
       email,
       password,
       options: {
-        emailRedirectTo: "https://johk.vercel.app",
         data: {
           username,
         },
@@ -149,6 +158,23 @@ export default function AuthPage() {
           >
             {mode === "login" ? "Welcome back 👋" : "Join us 🚀"}
           </p>
+        </div>
+
+        <div
+          style={{
+            background: "#2a1800",
+            border: "1px solid #f59e0b",
+            color: "#fbbf24",
+            padding: "12px",
+            borderRadius: "12px",
+            marginBottom: "20px",
+            fontSize: "13px",
+            lineHeight: "1.6",
+          }}
+        >
+          ⚠️ Johk is still new and under development.
+          <br />
+          Please do NOT use a password you use on important accounts.
         </div>
 
         <div
