@@ -21,7 +21,14 @@ export default function AuthPage() {
   const handleLogin = async () => {
     if (!email || !password) { setMessage({ type: "error", text: "⚠️ Enter email and password" }); return; }
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signUp({
+  email,
+  password,
+  options: {
+    emailRedirectTo: "https://johk.vercel.app",
+    data: { username }
+  }
+});  email, password });
     setLoading(false);
     if (error) setMessage({ type: "error", text: "❌ Wrong email or password" });
     else window.location.href = '/';
