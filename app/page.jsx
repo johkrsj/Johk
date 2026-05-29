@@ -12,14 +12,16 @@ export default function Home() {
   const toggleLike = (id) => setPosts(posts.map(p => p.id === id ? { ...p, liked: !p.liked, likes: p.liked ? p.likes - 1 : p.likes + 1 } : p));
 
   return (
-    <div style={{ background: "#0a0a0a", minHeight: "100vh", color: "#fff", fontFamily: "'Segoe UI', sans-serif", direction: "rtl", maxWidth: 430, margin: "0 auto" }}>
+    <div style={{ background: "background: "#2a2a2a"
+", minHeight: "100vh", color: "#fff", fontFamily: "'Segoe UI', sans-serif", direction: "rtl", maxWidth: 430, margin: "0 auto" }}>
       <div style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(10,10,10,0.95)", backdropFilter: "blur(12px)", borderBottom: "1px solid #1f1f1f", padding: "14px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span style={{ fontSize: 22, fontWeight: 800, background: "linear-gradient(135deg, #f97316, #ec4899)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>فلاش ⚡</span>
+        <span style={{ fontSize: 22, fontWeight: 800, background: "linear-gradient(135deg, #f97316, #ec4899)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>johk</span>
       </div>
       {posts.map(post => (
         <div key={post.id} style={{ marginBottom: 24 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 16px" }}>
-            <div style={{ width: 38, height: 38, borderRadius: "50%", background: `linear-gradient(135deg, ${post.user.color}, #ec4899)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, fontWeight: 700 }}>{post.user.avatar}</div>
+            <div style={{ width: 38, height: 38, borderRadius: "50%", background: `color: "#ffffff"
+, ${post.user.color}, #ec4899)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, fontWeight: 700 }}>{post.user.avatar}</div>
             <div>
               <div style={{ fontWeight: 700, fontSize: 14 }}>{post.user.name}</div>
               <div style={{ fontSize: 11, color: "#666" }}>{post.time}</div>
