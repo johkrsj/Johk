@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div style={{ background: "#2a2a2a", minHeight: "100vh", color: "#fff", fontFamily: "'Segoe UI', sans-serif", direction: "ltr", maxWidth: 430, margin: "0 auto" }}>
       <div style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(42,42,42,0.95)", backdropFilter: "blur(12px)", borderBottom: "1px solid #3a3a3a", padding: "14px 16px", display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
-        <span style={{ fontSize: 22, fontWeight: 800, color: "#ffffff" }}>Johk ⚡</span>
+        <span style={{ fontSize: 22, fontWeight: 800, color: "#ffffff" }}>Johk </span>
       </div>
       {posts.map(post => (
         <div key={post.id} style={{ marginBottom: 24 }}>
