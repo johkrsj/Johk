@@ -6,15 +6,15 @@ export default function HomePage() {
       style={{
         backgroundColor: "#000",
         minHeight: "100vh",
-        color: "white",
+        color: "#fff",
         padding: "40px",
-        fontFamily: "sans-serif",
+        fontFamily: "Arial",
       }}
     >
       <h1
         style={{
-          fontSize: "58px",
-          fontWeight: "bold",
+          fontSize: "56px",
+          fontWeight: "700",
           marginBottom: "20px",
         }}
       >
@@ -23,28 +23,30 @@ export default function HomePage() {
 
       <p
         style={{
-          color: "#999",
-          fontSize: "20px",
+          fontSize: "22px",
+          color: "#888",
           marginBottom: "40px",
         }}
       >
-        Johk social platform is working 🚀
+        Johk social platform is working
       </p>
 
       <div
         style={{
           display: "flex",
           gap: "16px",
-          marginBottom: "40px",
+          marginBottom: "50px",
+          flexWrap: "wrap",
         }}
       >
         <a href="/profile">
           <button
             style={{
-              padding: "14px 24px",
-              borderRadius: "14px",
+              padding: "14px 28px",
+              borderRadius: "16px",
               border: "none",
-              fontWeight: "bold",
+              fontSize: "18px",
+              fontWeight: "600",
               cursor: "pointer",
             }}
           >
@@ -54,36 +56,36 @@ export default function HomePage() {
 
         <button
           style={{
-            padding: "14px 24px",
-            borderRadius: "14px",
+            padding: "14px 28px",
+            borderRadius: "16px",
             border: "none",
-            fontWeight: "bold",
+            fontSize: "18px",
+            fontWeight: "600",
             cursor: "pointer",
           }}
         >
           Create Post
         </button>
 
-        <a href="/auth">
-          <button
-            style={{
-              padding: "14px 24px",
-              borderRadius: "14px",
-              border: "none",
-              fontWeight: "bold",
-              cursor: "pointer",
-            }}
-          >
-            Logout
-          </button>
-        </a>
+        <button
+          style={{
+            padding: "14px 28px",
+            borderRadius: "16px",
+            border: "none",
+            fontSize: "18px",
+            fontWeight: "600",
+            cursor: "pointer",
+          }}
+        >
+          Logout
+        </button>
       </div>
 
       <div
         style={{
-          backgroundColor: "#111",
+          backgroundColor: "#0a0a0a",
           border: "1px solid #222",
-          borderRadius: "24px",
+          borderRadius: "30px",
           padding: "40px",
           maxWidth: "700px",
         }}
@@ -99,15 +101,15 @@ export default function HomePage() {
 
         <div
           style={{
-            backgroundColor: "#181818",
-            padding: "30px",
+            backgroundColor: "#111",
+            padding: "40px",
             borderRadius: "24px",
           }}
         >
           <h3
             style={{
-              fontSize: "40px",
-              marginBottom: "20px",
+              fontSize: "38px",
+              marginBottom: "24px",
             }}
           >
             @gojo
@@ -116,10 +118,11 @@ export default function HomePage() {
           <p
             style={{
               fontSize: "24px",
-              color: "#eee",
+              lineHeight: "1.8",
+              color: "#ddd",
             }}
           >
-            This is the first test post on Johk 🔥
+            This is the first test post on Johk
           </p>
         </div>
       </div>
