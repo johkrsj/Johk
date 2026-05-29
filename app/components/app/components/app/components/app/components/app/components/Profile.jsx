@@ -20,6 +20,11 @@ export default function Profile() {
       </div>
       <button style={{ width: "100%", padding: "10px 0", background: "#3a3a3a", border: "none", borderRadius: 10, color: "#fff", fontSize: 14, fontWeight: 700, cursor: "pointer" }}>
         Edit Profile
+        <button 
+  onClick={() => window.location.href = '/auth'}
+  style={{ width: "100%", padding: "10px 0", background: "#fff", border: "none", borderRadius: 10, color: "#111", fontSize: 14, fontWeight: 700, cursor: "pointer", marginTop: 10 }}>
+  Login / Sign up
+</button>
       </button>
     </div>
   );
