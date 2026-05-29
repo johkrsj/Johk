@@ -10,10 +10,13 @@ const supabase = createClient(
 export default function AuthPage() {
   const [mode, setMode] = useState("login");
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
+
+  const validateUsername = (u) => /^[a-zA-Z0-9_.]+$/.test(u);
 
   const handleLogin = async () => {
     if (!email || !password) { setMessage({ type: "error", text: "⚠️ Enter email and password" }); return; }
@@ -21,15 +24,17 @@ export default function AuthPage() {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setLoading(false);
     if (error) setMessage({ type: "error", text: "❌ Wrong email or password" });
-    else setMessage({ type: "success", text: "✅ Welcome back!" });
+    else window.location.href = '/';
   };
 
   const handleSignup = async () => {
-    if (!email || !password || !confirmPassword) { setMessage({ type: "error", text: "⚠️ Fill all fields" }); return; }
+    if (!email || !password || !confirmPassword || !username) { setMessage({ type: "error", text: "⚠️ Fill all fields" }); return; }
+    if (username.length < 4) { setMessage({ type: "error", text: "❌ Username must be at least 4 characters" }); return; }
+    if (!validateUsername(username)) { setMessage({ type: "error", text: "❌ Username can only contain letters, numbers, _ and ." }); return; }
     if (password !== confirmPassword) { setMessage({ type: "error", text: "❌ Passwords don't match" }); return; }
     if (password.length < 6) { setMessage({ type: "error", text: "❌ Password too short" }); return; }
     setLoading(true);
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { error } = await supabase.auth.signUp({ email, password, options: { data: { username } } });
     setLoading(false);
     if (error) setMessage({ type: "error", text: "❌ " + error.message });
     else setMessage({ type: "success", text: "✅ Account created! Check your email" });
@@ -50,9 +55,16 @@ export default function AuthPage() {
           ))}
         </div>
         {mode === "signup" && (
-          <div style={{ background: "#1a1000", border: "1px solid #f97316aa", borderRadius: 12, padding: "12px 14px", marginBottom: 20, fontSize: 13, color: "#fbbf24" }}>
-            🔐 Choose a strong password you haven't used elsewhere
-          </div>
+          <>
+            <div style={{ background: "#1a1000", border: "1px solid #f97316aa", borderRadius: 12, padding: "12px 14px", marginBottom: 20, fontSize: 13, color: "#fbbf24" }}>
+              🔐 Choose a strong password you haven't used elsewhere
+            </div>
+            <div style={{ marginBottom: 16 }}>
+              <label style={{ display: "block", fontSize: 13, color: "#aaa", marginBottom: 8 }}>Username</label>
+              <input value={username} onChange={e => setUsername(e.target.value)} placeholder="john_doe" style={{ width: "100%", padding: "13px 16px", background: "#111", border: `1px solid ${username && !validateUsername(username) ? "#ef4444" : username && username.length >= 4 && validateUsername(username) ? "#22c55e" : "#333"}`, borderRadius: 12, color: "#fff", fontSize: 15, boxSizing: "border-box" }} />
+              <p style={{ fontSize: 11, color: "#666", marginTop: 4 }}>Letters, numbers, _ and . only — min 4 characters</p>
+            </div>
+          </>
         )}
         <div style={{ marginBottom: 16 }}>
           <label style={{ display: "block", fontSize: 13, color: "#aaa", marginBottom: 8 }}>Email</label>
