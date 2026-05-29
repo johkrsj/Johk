@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
@@ -10,10 +9,7 @@ const supabase = createClient(
 );
 
 export default function HomePage() {
-  const router = useRouter();
-
-  const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState("");
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     checkUser();
@@ -21,34 +17,32 @@ export default function HomePage() {
 
   const checkUser = async () => {
     const {
-      data: { session },
-    } = await supabase.auth.getSession();
+      data: { user },
+    } = await supabase.auth.getUser();
 
-    if (!session) {
-      router.push("/auth");
-      return;
+    if (!user) {
+      window.location.href = "/auth";
+    } else {
+      setUser(user);
     }
-
-    setUsername(session.user.user_metadata.username || "User");
-    setLoading(false);
   };
 
-  const logout = async () => {
+  const handleLogout = async () => {
     await supabase.auth.signOut();
-    router.push("/auth");
+    window.location.href = "/auth";
   };
 
-  if (loading) {
+  if (!user) {
     return (
       <div
         style={{
-          minHeight: "100vh",
-          background: "#111",
+          background: "#000",
           color: "#fff",
+          height: "100vh",
           display: "flex",
-          alignItems: "center",
           justifyContent: "center",
-          fontSize: "22px",
+          alignItems: "center",
+          fontSize: 22,
         }}
       >
         Loading...
@@ -60,34 +54,80 @@ export default function HomePage() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#111",
+        background: "#000",
         color: "#fff",
-        padding: "40px 20px",
+        padding: 20,
         fontFamily: "sans-serif",
       }}
     >
-      <h1 style={{ fontSize: "34px", marginBottom: "10px" }}>
-        Welcome, {username} 
+      <h1 style={{ fontSize: 35 }}>
+        Welcome, {user.user_metadata?.username || "User"}
       </h1>
 
-      <p style={{ color: "#888", marginBottom: "30px" }}>
-        Johk is now working correctly.
+      <p style={{ color: "#888" }}>
+        Johk social platform is working 🚀
       </p>
 
-      <button
-        onClick={logout}
+      <div
         style={{
-          background: "#fff",
-          color: "#111",
-          border: "none",
-          padding: "12px 20px",
-          borderRadius: "12px",
-          fontWeight: "bold",
-          cursor: "pointer",
+          marginTop: 30,
+          display: "flex",
+          gap: 12,
+          flexWrap: "wrap",
         }}
       >
-        Logout
-      </button>
+        <button
+          onClick={() => (window.location.href = "/profile")}
+          style={btn}
+        >
+          Profile
+        </button>
+
+        <button
+          onClick={() => (window.location.href = "/create")}
+          style={btn}
+        >
+          Create Post
+        </button>
+
+        <button onClick={handleLogout} style={btn}>
+          Logout
+        </button>
+      </div>
+
+      <div
+        style={{
+          marginTop: 50,
+          background: "#111",
+          padding: 20,
+          borderRadius: 20,
+          border: "1px solid #222",
+        }}
+      >
+        <h2>Feed</h2>
+
+        <div
+          style={{
+            background: "#1a1a1a",
+            padding: 16,
+            borderRadius: 14,
+            marginTop: 20,
+          }}
+        >
+          <h3>@gojo</h3>
+          <p>This is the first test post on Johk 🔥</p>
+        </div>
+      </div>
     </div>
   );
 }
+
+const btn = {
+  background: "#fff",
+  color: "#000",
+  border: "none",
+  padding: "12px 18px",
+  borderRadius: 12,
+  fontWeight: "bold",
+  cursor: "pointer",
+};
