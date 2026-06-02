@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
@@ -8,42 +8,38 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
-export default function HomePage() {
-  const [loading, setLoading] = useState(true);
-
+export default function Home() {
   useEffect(() => {
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (session) {
+        window.location.href = "/profile";
+      } else {
+        window.location.href = "/auth";
+      }
+    };
+
     checkUser();
   }, []);
-
-  const checkUser = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (user) {
-      window.location.href = "/profile";
-    } else {
-      window.location.href = "/auth";
-    }
-
-    setLoading(false);
-  };
 
   return (
     <div
       style={{
-        backgroundColor: "#000",
-        color: "#fff",
+        backgroundColor: "#121212",
         minHeight: "100vh",
         display: "flex",
-        alignItems: "center",
         justifyContent: "center",
-        fontFamily: "Arial",
-        fontSize: "28px",
-        fontWeight: "600",
+        alignItems: "center",
+        color: "#ffffff",
+        fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif",
       }}
     >
-      {loading ? "Loading..." : ""}
+      <div style={{ textAlign: "center" }}>
+        <h1 style={{ fontSize: "28px", fontWeight: 700, letterSpacing: "-0.5px", margin: 0 }}>
+          Johk
+        </h1>
+      </div>
     </div>
   );
 }
