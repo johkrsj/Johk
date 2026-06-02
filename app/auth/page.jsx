@@ -8,7 +8,6 @@ const supabase = createClient(
   "https://tsugkcdrinfesplujzbp.supabase.co",
   "Sb_publishable_8Y62Uzkr8W0RkLEsPWU9cA_gF7FgtuK"
 );
-
 );
 
 export default function AuthPage() {
