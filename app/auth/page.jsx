@@ -23,7 +23,7 @@ export default function AuthPage() {
     if (!email || !password) {
       setMessage({
         type: "error",
-        text: "⚠️ Enter email and password",
+        text: "Enter email and password",
       });
       return;
     }
@@ -40,10 +40,10 @@ export default function AuthPage() {
     if (error) {
       setMessage({
         type: "error",
-        text: "❌ Wrong email or password",
+        text: "Wrong email or password",
       });
     } else {
-      window.location.href = "/";
+      window.location.href = "/profile";
     }
   };
 
@@ -51,7 +51,7 @@ export default function AuthPage() {
     if (!email || !password || !confirmPassword || !username) {
       setMessage({
         type: "error",
-        text: "⚠️ Fill all fields",
+        text: "Fill all fields",
       });
       return;
     }
@@ -59,7 +59,7 @@ export default function AuthPage() {
     if (username.length < 4) {
       setMessage({
         type: "error",
-        text: "❌ Username must be at least 4 characters",
+        text: "Username must be at least 4 characters",
       });
       return;
     }
@@ -67,7 +67,7 @@ export default function AuthPage() {
     if (!validateUsername(username)) {
       setMessage({
         type: "error",
-        text: "❌ Username can only contain letters, numbers, _ and .",
+        text: "Username can only contain letters, numbers, underscores and dots",
       });
       return;
     }
@@ -75,7 +75,7 @@ export default function AuthPage() {
     if (password !== confirmPassword) {
       setMessage({
         type: "error",
-        text: "❌ Passwords don't match",
+        text: "Passwords do not match",
       });
       return;
     }
@@ -83,7 +83,7 @@ export default function AuthPage() {
     if (password.length < 6) {
       setMessage({
         type: "error",
-        text: "❌ Password too short",
+        text: "Password too short",
       });
       return;
     }
@@ -105,12 +105,12 @@ export default function AuthPage() {
     if (error) {
       setMessage({
         type: "error",
-        text: "❌ " + error.message,
+        text: error.message,
       });
     } else {
       setMessage({
         type: "success",
-        text: "✅ Account created! Check your email",
+        text: "Account created successfully. You can now login.",
       });
     }
   };
@@ -119,11 +119,11 @@ export default function AuthPage() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#2a2a2a",
+        background: "#121212",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        fontFamily: "'Segoe UI', sans-serif",
+        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
         padding: 20,
       }}
     >
@@ -131,19 +131,20 @@ export default function AuthPage() {
         style={{
           width: "100%",
           maxWidth: 420,
-          background: "#1a1a1a",
-          border: "1px solid #333",
-          borderRadius: 20,
-          padding: "36px 28px",
+          background: "#1e1e1e",
+          border: "1px solid #2d2d2d",
+          borderRadius: 16,
+          padding: "40px 32px",
         }}
       >
         <div style={{ textAlign: "center", marginBottom: 28 }}>
           <div
             style={{
-              fontSize: 28,
-              fontWeight: 900,
-              color: "#fff",
+              fontSize: 26,
+              fontWeight: 700,
+              color: "#ffffff",
               marginBottom: 6,
+              letterSpacing: "-0.5px"
             }}
           >
             Johk
@@ -151,37 +152,35 @@ export default function AuthPage() {
 
           <p
             style={{
-              color: "#666",
+              color: "#8e8e93",
               fontSize: 14,
               margin: 0,
             }}
           >
-            {mode === "login" ? "Welcome back 👋" : "Join us 🚀"}
+            {mode === "login" ? "Welcome back" : "Create an account"}
           </p>
         </div>
 
         <div
           style={{
-            background: "#2a1800",
-            border: "1px solid #f59e0b",
-            color: "#fbbf24",
-            padding: "12px",
-            borderRadius: "12px",
-            marginBottom: "20px",
+            background: "#1a140b",
+            border: "1px solid #453214",
+            color: "#d4a359",
+            padding: "14px",
+            borderRadius: "10px",
+            marginBottom: "24px",
             fontSize: "13px",
-            lineHeight: "1.6",
+            lineHeight: "1.5",
           }}
         >
-          ⚠️ Johk is still new and under development.
-          <br />
-          Please do NOT use a password you use on important accounts.
+          Johk is currently in active development. Please ensure you use a unique password for this platform.
         </div>
 
         <div
           style={{
             display: "flex",
-            background: "#111",
-            borderRadius: 12,
+            background: "#141414",
+            borderRadius: 8,
             padding: 4,
             marginBottom: 24,
           }}
@@ -195,14 +194,15 @@ export default function AuthPage() {
               }}
               style={{
                 flex: 1,
-                padding: "9px 0",
-                borderRadius: 10,
+                padding: "10px 0",
+                borderRadius: 6,
                 border: "none",
                 cursor: "pointer",
-                fontWeight: 700,
-                fontSize: 14,
-                background: mode === m ? "#fff" : "transparent",
-                color: mode === m ? "#111" : "#666",
+                fontWeight: 600,
+                fontSize: 13,
+                background: mode === m ? "#2a2a2a" : "transparent",
+                color: mode === m ? "#ffffff" : "#8e8e93",
+                transition: "all 0.2s ease"
               }}
             >
               {m === "login" ? "Login" : "Sign up"}
@@ -212,27 +212,14 @@ export default function AuthPage() {
 
         {mode === "signup" && (
           <>
-            <div
-              style={{
-                background: "#1a1000",
-                border: "1px solid #f97316aa",
-                borderRadius: 12,
-                padding: "12px 14px",
-                marginBottom: 20,
-                fontSize: 13,
-                color: "#fbbf24",
-              }}
-            >
-              🔐 Choose a strong password you haven't used elsewhere
-            </div>
-
-            <div style={{ marginBottom: 16 }}>
+            <div style={{ marginBottom: 18 }}>
               <label
                 style={{
                   display: "block",
-                  fontSize: 13,
-                  color: "#aaa",
+                  fontSize: 12,
+                  color: "#aeaeb2",
                   marginBottom: 8,
+                  fontWeight: 500
                 }}
               >
                 Username
@@ -241,23 +228,21 @@ export default function AuthPage() {
               <input
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="john_doe"
+                placeholder="username"
                 style={{
                   width: "100%",
-                  padding: "13px 16px",
-                  background: "#111",
+                  padding: "12px 14px",
+                  background: "#141414",
                   border: `1px solid ${
                     username && !validateUsername(username)
-                      ? "#ef4444"
-                      : username &&
-                        username.length >= 4 &&
-                        validateUsername(username)
-                      ? "#22c55e"
-                      : "#333"
+                      ? "#ff453a"
+                      : username && username.length >= 4 && validateUsername(username)
+                      ? "#30d158"
+                      : "#2d2d2d"
                   }`,
-                  borderRadius: 12,
-                  color: "#fff",
-                  fontSize: 15,
+                  borderRadius: 10,
+                  color: "#ffffff",
+                  fontSize: 14,
                   boxSizing: "border-box",
                 }}
               />
@@ -265,53 +250,55 @@ export default function AuthPage() {
               <p
                 style={{
                   fontSize: 11,
-                  color: "#666",
-                  marginTop: 4,
+                  color: "#636366",
+                  marginTop: 6,
                 }}
               >
-                Letters, numbers, _ and . only — min 4 characters
+                Letters, numbers, underscores and dots only (minimum 4 characters)
               </p>
             </div>
           </>
         )}
 
-        <div style={{ marginBottom: 16 }}>
+        <div style={{ marginBottom: 18 }}>
           <label
             style={{
               display: "block",
-              fontSize: 13,
-              color: "#aaa",
+              fontSize: 12,
+              color: "#aeaeb2",
               marginBottom: 8,
+              fontWeight: 500
             }}
           >
-            Email
+            Email address
           </label>
 
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="example@gmail.com"
+            placeholder="name@example.com"
             style={{
               width: "100%",
-              padding: "13px 16px",
-              background: "#111",
-              border: "1px solid #333",
-              borderRadius: 12,
-              color: "#fff",
-              fontSize: 15,
+              padding: "12px 14px",
+              background: "#141414",
+              border: "1px solid #2d2d2d",
+              borderRadius: 10,
+              color: "#ffffff",
+              fontSize: 14,
               boxSizing: "border-box",
             }}
           />
         </div>
 
-        <div style={{ marginBottom: mode === "signup" ? 16 : 20 }}>
+        <div style={{ marginBottom: 24 }}>
           <label
             style={{
               display: "block",
-              fontSize: 13,
-              color: "#aaa",
+              fontSize: 12,
+              color: "#aeaeb2",
               marginBottom: 8,
+              fontWeight: 500
             }}
           >
             Password
@@ -324,25 +311,26 @@ export default function AuthPage() {
             placeholder="••••••••"
             style={{
               width: "100%",
-              padding: "13px 16px",
-              background: "#111",
-              border: "1px solid #333",
-              borderRadius: 12,
-              color: "#fff",
-              fontSize: 15,
+              padding: "12px 14px",
+              background: "#141414",
+              border: "1px solid #2d2d2d",
+              borderRadius: 10,
+              color: "#ffffff",
+              fontSize: 14,
               boxSizing: "border-box",
-            }}
+                }}
           />
         </div>
 
         {mode === "signup" && (
-          <div style={{ marginBottom: 20 }}>
+          <div style={{ marginBottom: 24 }}>
             <label
               style={{
                 display: "block",
-                fontSize: 13,
-                color: "#aaa",
+                fontSize: 12,
+                color: "#aeaeb2",
                 marginBottom: 8,
+                fontWeight: 500
               }}
             >
               Confirm Password
@@ -355,18 +343,18 @@ export default function AuthPage() {
               placeholder="••••••••"
               style={{
                 width: "100%",
-                padding: "13px 16px",
-                background: "#111",
+                padding: "12px 14px",
+                background: "#141414",
                 border: `1px solid ${
                   confirmPassword && confirmPassword !== password
-                    ? "#ef4444"
+                    ? "#ff453a"
                     : confirmPassword === password && confirmPassword
-                    ? "#22c55e"
-                    : "#333"
+                    ? "#30d158"
+                    : "#2d2d2d"
                 }`,
-                borderRadius: 12,
-                color: "#fff",
-                fontSize: 15,
+                borderRadius: 10,
+                color: "#ffffff",
+                fontSize: 14,
                 boxSizing: "border-box",
               }}
             />
@@ -376,14 +364,16 @@ export default function AuthPage() {
         {message && (
           <div
             style={{
-              padding: "12px 16px",
-              borderRadius: 12,
-              marginBottom: 16,
-              fontSize: 14,
+              padding: "12px 14px",
+              borderRadius: 10,
+              marginBottom: 20,
+              fontSize: 13,
+              lineHeight: "1.4",
               background:
-                message.type === "success" ? "#0f2a1a" : "#2a0f0f",
+                message.type === "success" ? "#14251c" : "#2c1414",
               color:
-                message.type === "success" ? "#22c55e" : "#f87171",
+                message.type === "success" ? "#30d158" : "#ff453a",
+              border: `1px solid ${message.type === "success" ? "#1e3d2b" : "#441f1f"}`
             }}
           >
             {message.text}
@@ -396,20 +386,21 @@ export default function AuthPage() {
           style={{
             width: "100%",
             padding: "14px 0",
-            background: loading ? "#333" : "#fff",
+            background: loading ? "#2d2d2d" : "#ffffff",
             border: "none",
-            borderRadius: 14,
-            color: "#111",
-            fontSize: 16,
-            fontWeight: 800,
+            borderRadius: 10,
+            color: loading ? "#8e8e93" : "#000000",
+            fontSize: 14,
+            fontWeight: 600,
             cursor: loading ? "not-allowed" : "pointer",
+            transition: "background 0.2s ease"
           }}
         >
           {loading
-            ? "Loading..."
+            ? "Processing..."
             : mode === "login"
-            ? "Login →"
-            : "Create Account →"}
+            ? "Login"
+            : "Create Account"}
         </button>
       </div>
     </div>
