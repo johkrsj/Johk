@@ -3,11 +3,10 @@
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-// الربط المباشر لضمان عمل الاتصال والكوكيز من الجوال
+// الربط المباشر والصحيح بقاعدة البيانات ومفتاح الأمان الخاص بك
 const supabase = createClient(
   "https://tsugkcdrinfesplujzbp.supabase.co",
   "Sb_publishable_8Y62Uzkr8W0RkLEsPWU9cA_gF7FgtuK"
-);
 );
 
 export default function AuthPage() {
@@ -28,6 +27,7 @@ export default function AuthPage() {
     }
 
     setLoading(true);
+    setMessage(null);
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
@@ -70,6 +70,7 @@ export default function AuthPage() {
     }
 
     setLoading(true);
+    setMessage(null);
 
     const { error } = await supabase.auth.signUp({
       email,
