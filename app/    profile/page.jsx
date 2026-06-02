@@ -1,49 +1,45 @@
 "use client";
 
-export default function Home() {
+import { useEffect } from "react";
+import { createClient } from "@supabase/supabase-js";
 
-  function OpenProfile() {
-    window.location.href = "/profile";
-  }
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
+export default function Home() {
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (session) {
+        window.location.href = "/profile";
+      } else {
+        window.location.href = "/auth";
+      }
+    };
+
+    checkUser();
+  }, []);
 
   return (
     <div
       style={{
-        backgroundColor: "#0a0a0a",
+        backgroundColor: "#121212",
         minHeight: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "column",
-        color: "white",
-        fontFamily: "Arial",
+        color: "#ffffff",
+        fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif",
       }}
     >
-      <h1
-        style={{
-          fontSize: "60px",
-          marginBottom: "30px",
-          letterSpacing: "-2px",
-        }}
-      >
-        JOHK
-      </h1>
-
-      <button
-        onClick={OpenProfile}
-        style={{
-          padding: "16px 34px",
-          borderRadius: "18px",
-          border: "none",
-          backgroundColor: "white",
-          color: "black",
-          fontSize: "18px",
-          fontWeight: "600",
-          cursor: "pointer",
-        }}
-      >
-        Enter
-      </button>
+      <div style={{ textAlign: "center" }}>
+        <h1 style={{ fontSize: "28px", fontWeight: 700, letterSpacing: "-0.5px", margin: 0 }}>
+          Johk
+        </h1>
+      </div>
     </div>
   );
 }
