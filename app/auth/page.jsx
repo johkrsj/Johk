@@ -3,10 +3,12 @@
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-// الربط المباشر والصحيح بقاعدة البيانات ومفتاح الأمان الخاص بك
+// الاتصال الصحيح والمعدل بحرف صغير لضمان قبول نظام الأمان في Supabase
 const supabase = createClient(
   "https://tsugkcdrinfesplujzbp.supabase.co",
-  ""sb_publishable_8Y62Uzkr8W0RkLEsPWU9cA_gF7FgtuK"
+  "sb_publishable_8Y62Uzkr8W0RkLEsPWU9cA_gF7FgtuK"
+);
+
 export default function AuthPage() {
   const [mode, setMode] = useState("login");
   const [email, setEmail] = useState("");
