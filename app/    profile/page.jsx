@@ -1,44 +1,25 @@
 "use client";
 
-import { useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
-
-export default function Home() {
-  useEffect(() => {
-    const checkUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (session) {
-        window.location.href = "/profile";
-      } else {
-        window.location.href = "/auth";
-      }
-    };
-
-    checkUser();
-  }, []);
-
+export default function ProfilePage() {
   return (
-    <div
-      style={{
-        backgroundColor: "#121212",
-        minHeight: "100vh",
-        display: "flex",
+    <div 
+      style={{ 
+        minHeight: "100vh", 
+        background: "#121212", 
+        color: "#ffffff", 
+        display: "flex", 
+        alignItems: "center", 
         justifyContent: "center",
-        alignItems: "center",
-        color: "#ffffff",
-        fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif",
+        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
       }}
     >
       <div style={{ textAlign: "center" }}>
-        <h1 style={{ fontSize: "28px", fontWeight: 700, letterSpacing: "-0.5px", margin: 0 }}>
-          Johk
+        <h1 style={{ fontSize: 26, fontWeight: 700, marginBottom: 8, letterSpacing: "-0.5px" }}>
+          Profile
         </h1>
+        <p style={{ color: "#8e8e93", fontSize: 14, margin: 0 }}>
+          Welcome to Johk platform
+        </p>
       </div>
     </div>
   );
