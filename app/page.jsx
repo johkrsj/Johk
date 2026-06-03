@@ -13,9 +13,9 @@ export default function Home() {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        window.location.href = "/profile";
+        window.location.href = "https://johk.vercel.app/profile";
       } else {
-        window.location.href = "/auth";
+        window.location.href = "https://johk.vercel.app/auth";
       }
     };
     checkUser();
