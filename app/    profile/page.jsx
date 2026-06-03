@@ -16,7 +16,7 @@ export default function ProfilePage() {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
-        window.location.href = "/auth";
+        window.location.href = "https://johk.vercel.app/auth";
       } else {
         setUser(session.user);
       }
@@ -27,7 +27,7 @@ export default function ProfilePage() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    window.location.href = "/auth";
+    window.location.href = "https://johk.vercel.app/auth";
   };
 
   if (loading) {
@@ -43,16 +43,3 @@ export default function ProfilePage() {
       <div style={{ maxWidth: "600px", margin: "0 auto", backgroundColor: "#1e1e1e", borderRadius: "16px", padding: "30px", border: "1px solid #2d2d2d" }}>
         <h1 style={{ fontSize: "28px", fontWeight: "700", marginBottom: "10px" }}>Johk Profile</h1>
         <p style={{ color: "#8e8e93", marginBottom: "20px" }}>Welcome to your workspace</p>
-        
-        <div style={{ backgroundColor: "#141414", padding: "15px", borderRadius: "10px", marginBottom: "30px", border: "1px solid #2d2d2d" }}>
-          <span style={{ display: "block", fontSize: "12px", color: "#8e8e93", marginBottom: "5px" }}>Email Address</span>
-          <span style={{ fontSize: "16px", fontWeight: "500" }}>{user?.email}</span>
-        </div>
-
-        <button onClick={handleLogout} style={{ padding: "12px 24px", backgroundColor: "#ff453a", border: "none", borderRadius: "10px", color: "#ffffff", fontWeight: "600", cursor: "pointer" }}>
-          Logout
-        </button>
-      </div>
-    </div>
-  );
-}
